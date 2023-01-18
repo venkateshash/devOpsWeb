@@ -19,8 +19,8 @@ stages{
 
         stage ('Deployments'){
         
-                    steps {
-                        sh "scp -v -o StrictHostKeyChecking=no **/*.war root@${params.staging_server}:/opt/tomcat/webapps/"
+                    steps{
+                       deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://localhost:9090/')], contextPath: null, war: '**/*.war'
                     }
          }
     }
